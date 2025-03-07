@@ -1,5 +1,12 @@
 $(document).ready(function() {
-    let selectedDates = [];
+    let selectedDates = {};
+    const colors = {
+        red: { name: "Red", count: 0 },
+        blue: { name: "Blue", count: 0 },
+        green: { name: "Green", count: 0 },
+        orange: { name: "Orange", count: 0 },
+        purple: { name: "Purple", count: 0 }
+    };
 
     function generateCalendar(daysInMonth, startDay) {
         $('#calendar').empty();
@@ -20,8 +27,8 @@ $(document).ready(function() {
         // Create cells for each day of the month
         for (let i = startDay; i < daysInMonth + startDay; i++) {
             let dayDiv = $('<div>').text(date).data('date', date);
-            if (selectedDates.includes(date)) {
-                dayDiv.addClass('selected');
+            if (selectedDates[date]) {
+                dayDiv.addClass('selected').css('background-color', selectedDates[date]);
             }
             if (i % 7 === 0) { // Sunday
                 dayDiv.addClass('sunday');
@@ -40,22 +47,50 @@ $(document).ready(function() {
 
     function updateStats() {
         let totalDays = parseInt($('#daysInMonth').val());
-        let selectedCount = selectedDates.length;
+        let selectedCount = Object.keys(selectedDates).length;
         let unselectedCount = totalDays - selectedCount;
 
         $('#selectedCount').text(selectedCount);
         $('#unselectedCount').text(unselectedCount);
+
+        // Reset color counts
+        for (let color in colors) {
+            colors[color].count = 0;
+        }
+
+        // Calculate color counts
+        for (let date in selectedDates) {
+            let color = selectedDates[date];
+            colors[color].count++;
+        }
+
+        // Update color stats
+        $('#colorStats').empty();
+        for (let color in colors) {
+            if (colors[color].count > 0) {
+                $('#colorStats').append(`
+                    <div class="color-stat">
+                        <span style="background-color: ${color}; width: 20px; height: 20px; display: inline-block; border-radius: 50%;"></span>
+                        ${colors[color].name}: ${colors[color].count}
+                    </div>
+                `);
+            }
+        }
     }
 
     $('#calendar').on('click', 'div', function() {
         let date = $(this).data('date');
         if (date) {
+            let selectedColor = $('#colorPicker').val();
             if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-                selectedDates = selectedDates.filter(d => d !== date);
+                let currentColor = selectedDates[date];
+                colors[currentColor].count--;
+                delete selectedDates[date];
+                $(this).removeClass('selected').css('background-color', '');
             } else {
-                $(this).addClass('selected');
-                selectedDates.push(date);
+                selectedDates[date] = selectedColor;
+                colors[selectedColor].count++;
+                $(this).addClass('selected').css('background-color', selectedColor);
             }
             updateStats();
         }
@@ -64,7 +99,7 @@ $(document).ready(function() {
     $('#daysInMonth, #startDay').change(function() {
         let daysInMonth = parseInt($('#daysInMonth').val());
         let startDay = parseInt($('#startDay').val());
-        selectedDates = [];
+        selectedDates = {};
         generateCalendar(daysInMonth, startDay);
     });
 
