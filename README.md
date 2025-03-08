@@ -1,84 +1,109 @@
-# staffschedule
+# Staff Schedule Management System
 
-Staff Schedule Management System
-Overview
-The Staff Schedule Management System is a web-based application designed to help users manage staff assignments for specific dates using an interactive calendar. It allows users to assign staff members to dates, visualize the assignments with color-coded cells, and share the schedule as an image. The application is built using HTML, CSS, JavaScript, and Bootstrap, with additional functionality provided by html2canvas for sharing.
+## Overview
+The **Staff Schedule Management System** is a web-based application designed to help users manage staff assignments for specific dates using an interactive calendar. It allows users to assign staff members to dates, visualize the assignments with color-coded cells, and share the schedule as an image. The application is built using **HTML**, **CSS**, **JavaScript**, and **Bootstrap**, with additional functionality provided by **html2canvas** for sharing.
 
-Features
-Interactive Calendar:
+---
 
-Dynamically generates a calendar based on the number of days in the month and the starting day.
+## Features
+1. **Interactive Calendar**:
+   - Dynamically generates a calendar based on the number of days in the month and the starting day.
+   - Allows users to assign staff members to dates by clicking on the date cells.
 
-Allows users to assign staff members to dates by clicking on the date cells.
+2. **Staff Assignment**:
+   - Staff members are represented by colors (red, blue, green, orange, purple).
+   - Users can select a staff member from a dropdown menu and assign them to a date.
 
-Staff Assignment:
+3. **Statistics and Visualization**:
+   - Displays the number of days assigned to each staff member and the number of remaining unassigned days.
+   - Color-coded cards provide a visual representation of the assignments.
 
-Staff members are represented by colors (red, blue, green, orange, purple).
+4. **Reset Functionality**:
+   - Reset color assignments or reset all settings (including staff names) to default values.
 
-Users can select a staff member from a dropdown menu and assign them to a date.
+5. **Share Functionality**:
+   - Capture the calendar and statistics as an image and share it via WhatsApp.
 
-Statistics and Visualization:
+6. **Customizable Settings**:
+   - Customize the number of days in the month and the starting day.
+   - Edit staff names and apply changes dynamically.
 
-Displays the number of days assigned to each staff member and the number of remaining unassigned days.
+7. **Responsive Design**:
+   - Fully responsive layout that works on both desktop and mobile devices.
 
-Color-coded cards provide a visual representation of the assignments.
+---
 
-Reset Functionality:
+## Technologies Used
+- **HTML**: Structure of the application.
+- **CSS**: Styling and layout.
+- **JavaScript**: Logic and interactivity.
+- **Bootstrap**: Responsive design and pre-built components.
+- **Bootstrap Icons**: Icons for buttons and cards.
+- **html2canvas**: Captures the calendar and statistics as an image.
 
-Reset color assignments or reset all settings (including staff names) to default values.
+---
 
-Share Functionality:
+## How to Use
+1. **Assign Staff to Dates**:
+   - Select a staff member from the dropdown menu.
+   - Click on a date in the calendar to assign the selected staff member to that date.
 
-Capture the calendar and statistics as an image and share it via WhatsApp.
+2. **View Statistics**:
+   - The statistics section displays the number of days assigned to each staff member and the number of remaining unassigned days.
 
-Customizable Settings:
+3. **Reset Assignments**:
+   - Use the "Reset Colors" button to clear all staff assignments.
+   - Use the "Reset All" button to reset all settings to default values.
 
-Customize the number of days in the month and the starting day.
+4. **Share Schedule**:
+   - Click the "Share" button to capture the calendar and statistics as an image and share it via WhatsApp.
 
-Edit staff names and apply changes dynamically.
+5. **Customize Settings**:
+   - Adjust the number of days in the month and the starting day using the dropdowns in the settings section.
+   - Edit staff names and click "Apply Staff Names" to save the changes.
 
-Responsive Design:
+---
 
-Fully responsive layout that works on both desktop and mobile devices.
+## Installation
+To run this project locally, follow these steps:
 
-Technologies Used
-HTML: Structure of the application.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/milandulals/staffschedule.git
+   cd staffschedule
+   ```
 
-CSS: Styling and layout.
+2. **Open the Project**:
+   - Open the `index.html` file in your browser.
 
-JavaScript: Logic and interactivity.
+3. **Optional: Host on a Local Server**:
+   - Use a local server (e.g., `Live Server` in VS Code) to avoid CORS issues with `html2canvas`.
 
-Bootstrap: Responsive design and pre-built components.
+---
 
-Bootstrap Icons: Icons for buttons and cards.
+## Live Demo
+You can view a live demo of the project [here](https://milandulals.github.io/staffschedule/).
 
-html2canvas: Captures the calendar and statistics as an image.
+---
 
 
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-How to Use
-Assign Staff to Dates:
+---
 
-Select a staff member from the dropdown menu.
+## Acknowledgments
+- **Bootstrap** for the responsive design framework.
+- **Bootstrap Icons** for the icons used in the project.
+- **html2canvas** for the sharing functionality.
 
-Click on a date in the calendar to assign the selected staff member to that date.
+---
 
-View Statistics:
+## Contact
+For any questions or feedback, feel free to reach out:
+- **Email**: milandulalss@gmail.com
+- **GitHub**: [milandulals](https://github.com/milandulals)
 
-The statistics section displays the number of days assigned to each staff member and the number of remaining unassigned days.
+---
 
-Reset Assignments:
-
-Use the "Reset Colors" button to clear all staff assignments.
-
-Use the "Reset All" button to reset all settings to default values.
-
-Share Schedule:
-
-Click the "Share" button to capture the calendar and statistics as an image and share it via WhatsApp.
-
-Customize Settings:
-
-Adjust the number of days in the month and the starting day using the dropdowns in the settings section.
-
-Edit staff names and click "Apply Staff Names" to save the changes.
+Enjoy using the **Staff Schedule Management System**! 🚀
