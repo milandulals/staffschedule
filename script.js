@@ -7,11 +7,13 @@ $(document).ready(function() {
         orange: "Staff 4",
         purple: "Staff 5"
     };
+    let selectedStaff = localStorage.getItem('selectedStaff') || "red"; // Default to Staff 1
 
-    // Function to save selected dates and staff names to localStorage
+    // Function to save selected dates, staff names, and selected staff to localStorage
     function saveToLocalStorage() {
         localStorage.setItem('selectedDates', JSON.stringify(selectedDates));
         localStorage.setItem('staffNames', JSON.stringify(staffNames));
+        localStorage.setItem('selectedStaff', selectedStaff);
     }
 
     // Function to get next month's info
@@ -32,7 +34,7 @@ $(document).ready(function() {
     // Function to update today's date and next month info
     function updateDateInfo() {
         const today = new Date();
-        const todayDate = today.toLocaleDateString();
+        const todayDate = today.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
         const nextMonthInfo = getNextMonthInfo();
 
         $('#todayDate').text(todayDate);
@@ -93,7 +95,6 @@ $(document).ready(function() {
         let selectedCount = Object.keys(selectedDates).length;
         let unselectedCount = totalDays - selectedCount;
 
-        $('#selectedCount').text(selectedCount);
         $('#unselectedCount').text(unselectedCount);
 
         // Reset color counts
@@ -111,43 +112,48 @@ $(document).ready(function() {
             colors[color].count++;
         }
 
-        // Update color count cards
-        $('#colorCountCards').empty();
+        // Clear existing staff cards
+        $('#countingSection').empty();
+
+        // Add the Remaining card
+        $('#countingSection').append(`
+            <div class="col-md-4">
+                <div class="card bg-secondary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-calendar"></i> Remaining</h5>
+                        <p class="card-text"><span id="unselectedCount">${unselectedCount}</span> days</p>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        // Add dynamic staff cards
         for (let color in colors) {
             if (colors[color].count > 0) {
-                $('#colorCountCards').append(`
-                    <div class="col-md-2">
-                        <div class="color-count-card">
-                            <span style="background-color: ${color};"></span>
-                            ${colors[color].name}: ${colors[color].count}
+                $('#countingSection').append(`
+                    <div class="col-md-4">
+                        <div class="card bg-${color} text-white">
+                            <div class="card-body">
+                                <h5 class="card-title"><i class="bi bi-person"></i> ${colors[color].name}</h5>
+                                <p class="card-text"><span id="${color}Count">${colors[color].count}</span> days</p>
+                            </div>
                         </div>
                     </div>
                 `);
             }
         }
-
-        // Update dropdown staff names
-        $('#colorPicker').html(`
-            <option value="red"><span class="color-indicator" style="background-color: red;"></span> ${staffNames.red}</option>
-            <option value="blue"><span class="color-indicator" style="background-color: blue;"></span> ${staffNames.blue}</option>
-            <option value="green"><span class="color-indicator" style="background-color: green;"></span> ${staffNames.green}</option>
-            <option value="orange"><span class="color-indicator" style="background-color: orange;"></span> ${staffNames.orange}</option>
-            <option value="purple"><span class="color-indicator" style="background-color: purple;"></span> ${staffNames.purple}</option>
-        `);
     }
 
     // Event listener for date clicks
     $('#calendar').on('click', 'div', function() {
         let date = $(this).data('date');
         if (date) {
-            let selectedColor = $('#colorPicker').val();
             if ($(this).hasClass('selected')) {
-                let currentColor = selectedDates[date];
                 delete selectedDates[date];
                 $(this).removeClass('selected').css('background-color', '');
             } else {
-                selectedDates[date] = selectedColor;
-                $(this).addClass('selected').css('background-color', selectedColor);
+                selectedDates[date] = selectedStaff;
+                $(this).addClass('selected').css('background-color', selectedStaff);
             }
             updateStats();
             saveToLocalStorage();
@@ -157,9 +163,8 @@ $(document).ready(function() {
     // Event listener for reset colors button
     $('#resetColors').on('click', function() {
         selectedDates = {};
-        updateStats();
-        saveToLocalStorage();
-        generateCalendar($('#daysInMonth').val(), $('#startDay').val());
+        localStorage.removeItem('selectedDates');
+        location.reload(); // Reload the page
     });
 
     // Event listener for reset all button
@@ -172,8 +177,10 @@ $(document).ready(function() {
             orange: "Staff 4",
             purple: "Staff 5"
         };
+        selectedStaff = "red"; // Reset to Staff 1
         localStorage.removeItem('selectedDates');
         localStorage.removeItem('staffNames');
+        localStorage.removeItem('selectedStaff');
         updateStats();
         updateDateInfo(); // Reset to default next month values
         $('#staff1').val("Staff 1");
@@ -194,6 +201,12 @@ $(document).ready(function() {
         updateStats();
     });
 
+    // Event listener for staff selection change
+    $('#colorPicker').change(function() {
+        selectedStaff = $(this).val();
+        saveToLocalStorage();
+    });
+
     // Event listener for daysInMonth and startDay changes
     $('#daysInMonth, #startDay').change(function() {
         let daysInMonth = parseInt($('#daysInMonth').val());
@@ -203,6 +216,9 @@ $(document).ready(function() {
 
     // Event listener for share button
     $('#shareButton').on('click', function() {
+        // Hide the settings section before capturing
+        $('#settingsSection').hide();
+
         // Capture the calendar and stats as an image
         html2canvas(document.querySelector(".container")).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
@@ -215,6 +231,9 @@ $(document).ready(function() {
 
             // Save or share the PDF
             pdf.save("Staff_Schedule.pdf");
+
+            // Show the settings section again
+            $('#settingsSection').show();
         });
     });
 
@@ -225,4 +244,5 @@ $(document).ready(function() {
     $('#staff3').val(staffNames.green);
     $('#staff4').val(staffNames.orange);
     $('#staff5').val(staffNames.purple);
+    $('#colorPicker').val(selectedStaff); // Set the selected staff in the dropdown
 });

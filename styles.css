@@ -109,6 +109,26 @@ h1 {
     margin-right: 8px;
 }
 
+.bg-red {
+    background-color: #dc3545 !important;
+}
+
+.bg-blue {
+    background-color: #0d6efd !important;
+}
+
+.bg-green {
+    background-color: #198754 !important;
+}
+
+.bg-orange {
+    background-color: #fd7e14 !important;
+}
+
+.bg-purple {
+    background-color: #6f42c1 !important;
+}
+
 @media (max-width: 768px) {
     .calendar div {
         padding: 10px;

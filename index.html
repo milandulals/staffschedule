@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff Schedule</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="styles.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -15,51 +16,38 @@
         <!-- System Name -->
         <h1 class="text-center mb-4">Staff Schedule</h1>
 
-        <!-- Controls -->
-        <div class="controls mb-4">
-            <div class="row g-3">
-                <div class="col-md-6">
-                    <label for="daysInMonth" class="form-label">Days in Month:</label>
-                    <select id="daysInMonth" class="form-select">
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                        <option value="32">32</option>
-                    </select>
-                </div>
-                <div class="col-md-6">
-                    <label for="startDay" class="form-label">Start Day:</label>
-                    <select id="startDay" class="form-select">
-                        <option value="0">Sunday</option>
-                        <option value="1">Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        <option value="6">Saturday</option>
-                    </select>
+        <!-- Counting Section -->
+        <div class="row mb-4" id="countingSection">
+            <!-- Remaining Card -->
+            <div class="col-md-4">
+                <div class="card bg-secondary text-white">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="bi bi-calendar"></i> Remaining</h5>
+                        <p class="card-text"><span id="unselectedCount">28</span> days</p>
+                    </div>
                 </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-md-12">
-                    <label for="colorPicker" class="form-label">Select Staff:</label>
-                    <select id="colorPicker" class="form-select">
-                        <option value="red"><span class="color-indicator" style="background-color: red;"></span> Staff 1</option>
-                        <option value="blue"><span class="color-indicator" style="background-color: blue;"></span> Staff 2</option>
-                        <option value="green"><span class="color-indicator" style="background-color: green;"></span> Staff 3</option>
-                        <option value="orange"><span class="color-indicator" style="background-color: orange;"></span> Staff 4</option>
-                        <option value="purple"><span class="color-indicator" style="background-color: purple;"></span> Staff 5</option>
-                    </select>
-                </div>
-            </div>
+            <!-- Dynamic Staff Cards will be inserted here -->
         </div>
 
-        <!-- Color Count Cards -->
-        <div class="row mb-4" id="colorCountCards"></div>
+        <!-- Choose Staff -->
+       <!-- Choose Staff -->
+<!-- Choose Staff -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <label for="colorPicker" class="form-label"><i class="bi bi-person"></i> Choose Staff:</label>
+        <select id="colorPicker" class="form-select">
+            <option value="red"><span class="color-indicator" style="background-color: red;"></span> Staff 1</option>
+            <option value="blue"><span class="color-indicator" style="background-color: blue;"></span> Staff 2</option>
+            <option value="green"><span class="color-indicator" style="background-color: green;"></span> Staff 3</option>
+            <option value="orange"><span class="color-indicator" style="background-color: orange;"></span> Staff 4</option>
+            <option value="purple"><span class="color-indicator" style="background-color: purple;"></span> Staff 5</option>
+        </select>
+    </div>
+</div>
 
         <!-- Calendar -->
-        <div class="calendar-container">
+        <div class="calendar-container mb-4">
             <div class="calendar" id="calendar">
                 <div class="day-header">Sun</div>
                 <div class="day-header">Mon</div>
@@ -71,65 +59,99 @@
             </div>
         </div>
 
-        <!-- Reset and Share Buttons -->
-        <div class="row mt-4">
+        <!-- Reset Section -->
+        <div class="row mb-4">
             <div class="col-md-4">
-                <button id="resetColors" class="btn btn-warning w-100">Reset Colors</button>
+                <button id="resetColors" class="btn btn-warning w-100"><i class="bi bi-arrow-counterclockwise"></i> Reset Colors</button>
             </div>
             <div class="col-md-4">
-                <button id="resetAll" class="btn btn-danger w-100">Reset All</button>
+                <button id="resetAll" class="btn btn-danger w-100"><i class="bi bi-trash"></i> Reset All</button>
             </div>
             <div class="col-md-4">
-                <button id="shareButton" class="btn btn-success w-100">Share</button>
+                <button id="shareButton" class="btn btn-success w-100"><i class="bi bi-share"></i> Share</button>
             </div>
         </div>
 
         <!-- Today's Date and Next Month Info -->
-        <div class="row mt-4">
+        <div class="row mb-4">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card bg-primary text-white">
                     <div class="card-body">
-                        <h5 class="card-title">Today's Date</h5>
+                        <h5 class="card-title"><i class="bi bi-calendar-event"></i> Today's Date</h5>
                         <p id="todayDate" class="card-text"></p>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="card">
+                <div class="card bg-success text-white">
                     <div class="card-body">
-                        <h5 class="card-title">Next Month</h5>
+                        <h5 class="card-title"><i class="bi bi-calendar-month"></i> Next Month</h5>
                         <p id="nextMonthInfo" class="card-text"></p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Editable Staff Names -->
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <h4>Edit Staff Names</h4>
-                <div class="staff-names">
-                    <div class="mb-3">
-                        <label for="staff1" class="form-label">Staff 1:</label>
-                        <input type="text" id="staff1" class="form-control" value="Staff 1">
+        <!-- Settings Section -->
+        <div class="card mb-4" id="settingsSection">
+            <div class="card-header bg-info text-white">
+                <h5 class="card-title"><i class="bi bi-gear"></i> Settings</h5>
+            </div>
+            <div class="card-body">
+                <!-- Days in Month and Start Day -->
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="daysInMonth" class="form-label"><i class="bi bi-calendar-day"></i> Days in Month:</label>
+                        <select id="daysInMonth" class="form-select">
+                            <option value="28">28</option>
+                            <option value="29">29</option>
+                            <option value="30">30</option>
+                            <option value="31">31</option>
+                            <option value="32">32</option>
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="staff2" class="form-label">Staff 2:</label>
-                        <input type="text" id="staff2" class="form-control" value="Staff 2">
+                    <div class="col-md-6">
+                        <label for="startDay" class="form-label"><i class="bi bi-calendar-week"></i> Start Day:</label>
+                        <select id="startDay" class="form-select">
+                            <option value="0">Sunday</option>
+                            <option value="1">Monday</option>
+                            <option value="2">Tuesday</option>
+                            <option value="3">Wednesday</option>
+                            <option value="4">Thursday</option>
+                            <option value="5">Friday</option>
+                            <option value="6">Saturday</option>
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="staff3" class="form-label">Staff 3:</label>
-                        <input type="text" id="staff3" class="form-control" value="Staff 3">
+                </div>
+
+                <!-- Edit Staff Names -->
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <h5><i class="bi bi-pencil"></i> Edit Staff Names</h5>
+                        <div class="staff-names">
+                            <div class="mb-3">
+                                <label for="staff1" class="form-label">Staff 1:</label>
+                                <input type="text" id="staff1" class="form-control" value="Staff 1">
+                            </div>
+                            <div class="mb-3">
+                                <label for="staff2" class="form-label">Staff 2:</label>
+                                <input type="text" id="staff2" class="form-control" value="Staff 2">
+                            </div>
+                            <div class="mb-3">
+                                <label for="staff3" class="form-label">Staff 3:</label>
+                                <input type="text" id="staff3" class="form-control" value="Staff 3">
+                            </div>
+                            <div class="mb-3">
+                                <label for="staff4" class="form-label">Staff 4:</label>
+                                <input type="text" id="staff4" class="form-control" value="Staff 4">
+                            </div>
+                            <div class="mb-3">
+                                <label for="staff5" class="form-label">Staff 5:</label>
+                                <input type="text" id="staff5" class="form-control" value="Staff 5">
+                            </div>
+                            <button id="applyStaffNames" class="btn btn-primary w-100"><i class="bi bi-check-circle"></i> Apply Staff Names</button>
+                        </div>
                     </div>
-                    <div class="mb-3">
-                        <label for="staff4" class="form-label">Staff 4:</label>
-                        <input type="text" id="staff4" class="form-control" value="Staff 4">
-                    </div>
-                    <div class="mb-3">
-                        <label for="staff5" class="form-label">Staff 5:</label>
-                        <input type="text" id="staff5" class="form-control" value="Staff 5">
-                    </div>
-                    <button id="applyStaffNames" class="btn btn-primary w-100">Apply Staff Names</button>
                 </div>
             </div>
         </div>
