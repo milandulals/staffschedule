@@ -16,6 +16,19 @@ $(document).ready(function() {
         localStorage.setItem('selectedStaff', selectedStaff);
     }
 
+    // Function to update the dropdown with dynamic staff names and color icons
+    function updateDropdown() {
+        $('#colorPicker').empty(); // Clear existing options
+        for (let color in staffNames) {
+            $('#colorPicker').append(`
+                <option value="${color}">
+                    <span class="color-indicator" style="background-color: ${color};"></span> ${staffNames[color]}
+                </option>
+            `);
+        }
+        $('#colorPicker').val(selectedStaff); // Set the selected staff
+    }
+
     // Function to get next month's info
     function getNextMonthInfo() {
         const today = new Date();
@@ -188,6 +201,7 @@ $(document).ready(function() {
         $('#staff3').val("Staff 3");
         $('#staff4').val("Staff 4");
         $('#staff5').val("Staff 5");
+        updateDropdown(); // Update dropdown with default names
     });
 
     // Event listener for apply staff names button
@@ -199,6 +213,7 @@ $(document).ready(function() {
         staffNames.purple = $('#staff5').val();
         saveToLocalStorage();
         updateStats();
+        updateDropdown(); // Update dropdown with new names
     });
 
     // Event listener for staff selection change
@@ -222,18 +237,15 @@ $(document).ready(function() {
         // Capture the calendar and stats as an image
         html2canvas(document.querySelector(".container")).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
-            const pdf = new jspdf.jsPDF('p', 'mm', 'a4');
-            const imgWidth = 210; // A4 width in mm
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-            // Add the image to the PDF
-            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-
-            // Save or share the PDF
-            pdf.save("Staff_Schedule.pdf");
 
             // Show the settings section again
             $('#settingsSection').show();
+
+            // Create a temporary link for WhatsApp sharing
+            const link = document.createElement('a');
+            link.href = `https://api.whatsapp.com/send?text=${encodeURIComponent('Check out my Staff Schedule!')}&media=${encodeURIComponent(imgData)}`;
+            link.target = '_blank';
+            link.click();
         });
     });
 
@@ -244,5 +256,5 @@ $(document).ready(function() {
     $('#staff3').val(staffNames.green);
     $('#staff4').val(staffNames.orange);
     $('#staff5').val(staffNames.purple);
-    $('#colorPicker').val(selectedStaff); // Set the selected staff in the dropdown
+    updateDropdown(); // Initialize dropdown with staff names and color icons
 });

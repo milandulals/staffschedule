@@ -31,21 +31,15 @@
         </div>
 
         <!-- Choose Staff -->
-       <!-- Choose Staff -->
-<!-- Choose Staff -->
-<div class="row mb-4">
-    <div class="col-md-12">
-        <label for="colorPicker" class="form-label"><i class="bi bi-person"></i> Choose Staff:</label>
-        <select id="colorPicker" class="form-select">
-            <option value="red"><span class="color-indicator" style="background-color: red;"></span> Staff 1</option>
-            <option value="blue"><span class="color-indicator" style="background-color: blue;"></span> Staff 2</option>
-            <option value="green"><span class="color-indicator" style="background-color: green;"></span> Staff 3</option>
-            <option value="orange"><span class="color-indicator" style="background-color: orange;"></span> Staff 4</option>
-            <option value="purple"><span class="color-indicator" style="background-color: purple;"></span> Staff 5</option>
-        </select>
-    </div>
-</div>
-
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <label for="colorPicker" class="form-label"><i class="bi bi-person"></i> Choose Staff:</label>
+                <select id="colorPicker" class="form-select">
+                    <!-- Dynamic options will be inserted here -->
+                </select>
+            </div>
+        </div>
+<hr>
         <!-- Calendar -->
         <div class="calendar-container mb-4">
             <div class="calendar" id="calendar">
@@ -59,18 +53,26 @@
             </div>
         </div>
 
-        <!-- Reset Section -->
-        <div class="row mb-4">
-            <div class="col-md-4">
+        <hr>
+        <!-- Reset and Share Buttons -->
+        <div class="row mt-4">
+            <div class="col-md-3">
                 <button id="resetColors" class="btn btn-warning w-100"><i class="bi bi-arrow-counterclockwise"></i> Reset Colors</button>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <button id="resetAll" class="btn btn-danger w-100"><i class="bi bi-trash"></i> Reset All</button>
             </div>
-            <div class="col-md-4">
-                <button id="shareButton" class="btn btn-success w-100"><i class="bi bi-share"></i> Share</button>
+            <div class="col-md-3">
+                <button id="shareButton" class="btn btn-success w-100"><i class="bi bi-share"></i> Share as PDF</button>
+            </div>
+            <div class="col-md-3">
+                <button id="whatsappButton" class="btn btn-success w-100"><i class="bi bi-whatsapp"></i> Share via WhatsApp</button>
             </div>
         </div>
+        
+        <br>
+        <hr>
+
 
         <!-- Today's Date and Next Month Info -->
         <div class="row mb-4">
@@ -91,7 +93,8 @@
                 </div>
             </div>
         </div>
-
+        <br>
+        <hr>
         <!-- Settings Section -->
         <div class="card mb-4" id="settingsSection">
             <div class="card-header bg-info text-white">
@@ -123,7 +126,7 @@
                         </select>
                     </div>
                 </div>
-
+<hr>
                 <!-- Edit Staff Names -->
                 <div class="row mt-4">
                     <div class="col-md-12">
