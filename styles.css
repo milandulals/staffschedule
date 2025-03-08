@@ -15,7 +15,13 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 800px;
+    max-width: 1000px;
+}
+
+h1 {
+    color: #343a40;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .calendar-container {
@@ -34,7 +40,8 @@ body {
     text-align: center;
     font-weight: bold;
     padding: 10px;
-    background-color: #e9ecef;
+    background-color: #343a40;
+    color: white;
     border-radius: 5px;
 }
 
@@ -61,18 +68,45 @@ body {
     color: #856404;
 }
 
-.stats {
-    padding: 15px;
-    background-color: #e9ecef;
+.color-count-card {
+    padding: 10px;
     border-radius: 5px;
+    text-align: center;
+    background-color: #e9ecef;
+    margin-bottom: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.stats h3 {
-    margin-top: 0;
+.color-count-card span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
 }
 
-.color-stat {
-    margin-top: 10px;
+.card {
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.staff-names {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.color-indicator {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 8px;
 }
 
 @media (max-width: 768px) {
